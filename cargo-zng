@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eu
-tempdir="$(mktemp -d)"
-trap 'rm -rf "$tempdir"' 0 INT
+tempdir=../libz-ng-sys; mkdir "$tempdir"  # tempdir="$(mktemp -d)"
+# trap 'rm -rf "$tempdir"' 0 INT
 cargo package -l --allow-dirty |
     tr '\\' '/' |
     grep -vxF -e Cargo.toml.orig -e .cargo_vcs_info.json |
@@ -10,5 +10,5 @@ cargo package -l --allow-dirty |
 cp Cargo-zng.toml "$tempdir/Cargo.toml"
 cp -a systest "$tempdir/systest"
 mv "$tempdir/systest/Cargo-zng.toml" "$tempdir/systest/Cargo.toml"
-cd "$tempdir"
-cargo "$@"
+# cd "$tempdir"
+# cargo "$@"
